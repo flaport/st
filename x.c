@@ -658,6 +658,14 @@ setsel(char *str, Time t)
 }
 
 void
+xsetalpha(void)
+{
+	dc.col[defaultbg].color.alpha = (unsigned short)(0xffff * alpha);
+	dc.col[defaultbg].pixel &= 0x00FFFFFF;
+	dc.col[defaultbg].pixel |= (unsigned char)(0xff * alpha) << 24;
+}
+
+void
 xsetsel(char *str)
 {
 	setsel(str, CurrentTime);
@@ -780,9 +788,7 @@ xloadcols(void)
 	/* set alpha value of bg color */
 	if (opt_alpha)
 		alpha = strtof(opt_alpha, NULL);
-	dc.col[defaultbg].color.alpha = (unsigned short)(0xffff * alpha);
-	dc.col[defaultbg].pixel &= 0x00FFFFFF;
-	dc.col[defaultbg].pixel |= (unsigned char)(0xff * alpha) << 24;
+    xsetalpha();
 	loaded = 1;
 }
 
@@ -799,6 +805,9 @@ xsetcolorname(int x, const char *name)
 
 	XftColorFree(xw.dpy, xw.vis, xw.cmap, &dc.col[x]);
 	dc.col[x] = ncolor;
+
+    if (x == defaultbg)
+        xsetalpha();
 
 	return 0;
 }
