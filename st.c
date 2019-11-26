@@ -1861,6 +1861,12 @@ strhandle(void)
 				}
 			}
 			return;
+        case 11: /* similar as urxvt, but only check for alpha */
+            if ( strescseq.args[1][0] == '[' ){
+                alpha = strtof(&strescseq.args[1][1], NULL);
+                xsetalpha();
+				redraw();
+            }
 		case 4: /* color set */
 			if (narg < 3)
 				break;
