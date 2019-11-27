@@ -244,6 +244,7 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_d,           kscrolldown,    {.i = 10} },
 	{ MODKEY,               XK_Return,      newterm,        {.i =  0} },
 	{ MODKEY,               XK_l,           copyurl,        {.i =  0} },
+	{ MODKEY,               XK_o,           opencopied,     {.v = "xdg-open"} },
 };
 
 /*
