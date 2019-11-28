@@ -6,6 +6,11 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "Mono:pixelsize=18:antialias=true:autohint=true";
+/* Spare fonts */
+static char *font2[] = {
+	"PowerlineSymbols:pixelsize=18:antialias=true:autohint=true",
+};
+
 static int borderpx = 2;
 
 /*

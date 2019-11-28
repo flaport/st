@@ -17,6 +17,7 @@ A list of all patches merged into master (in the order they were applied):
 * newterm
 * copyurl
 * openclipboard
+* font2
 
 ## Requirements
 In order to build st you need the Xlib header files.
