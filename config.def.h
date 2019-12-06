@@ -5,11 +5,15 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "monospace:pixelsize=18:antialias=true:autohint=true";
 /* Spare fonts */
 static char *font2[] = {
-/*	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true", */
-/*	"Hack Nerd Font Mono:pixelsize=11:antialias=true:autohint=true", */
+	"Symbola:pixelsize=18:antialias=true:autohint=true",
+	"PowerlineSymbols:pixelsize=18:antialias=true:autohint=true",
+	"Pomodoro:pixelsize=18:antialias=true:autohint=true",
+	"FontAwesome:pixelsize=18:antialias=true:autohint=true",
+	"Octicons:pixelsize=18:antialias=true:autohint=true",
+	"Icomoon:pixelsize=18:antialias=true:autohint=true",
 };
 
 static int borderpx = 2;
