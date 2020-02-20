@@ -253,9 +253,9 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_Down,        kscrolldown,    {.i =  1} },
 	{ MODKEY,               XK_u,           kscrollup,      {.i = 10} },
 	{ MODKEY,               XK_d,           kscrolldown,    {.i = 10} },
-	{ MODKEY,               XK_Return,      newterm,        {.i =  0} },
 	{ MODKEY,               XK_n,           copyurl,        {.i =  0} },
 	{ MODKEY,               XK_o,           opencopied,     {.v = "xdg-open"} },
+	{ TERMMOD,              XK_Return,      newterm,        {.i =  0} },
 };
 
 /*
