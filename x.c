@@ -65,6 +65,7 @@ typedef struct {
 #define XK_NO_MOD     0
 #define XK_SWITCH_MOD (1<<13)
 
+
 /* function definitions used in config.h */
 static void clipcopy(const Arg *);
 static void clippaste(const Arg *);
@@ -271,6 +272,8 @@ static char *opt_name  = NULL;
 static char *opt_title = NULL;
 
 static int oldbutton = 3; /* button event on startup: 3 = release */
+
+int has_libxft_gbra = 0;
 
 void
 clipcopy(const Arg *dummy)
@@ -1590,14 +1593,17 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
 
 	/* Render the glyphs. */
     // hacky anti-crash fix (just don't render the glyph)
-	// XftDrawGlyphFontSpec(xw.draw, fg, specs, len); // (original)
-    FcBool b = FcFalse;
-    FcPatternGetBool(specs->font->pattern, FC_COLOR, 0, &b);
-    if (!b) {
-        XftDrawGlyphFontSpec(xw.draw, fg, specs, len);
+    if (has_libxft_gbra){
+	    XftDrawGlyphFontSpec(xw.draw, fg, specs, len); // (original)
     } else {
-        XftDrawGlyphFontSpec(xw.draw, fg, &specs[1], len-1);
-	}
+        FcBool b = FcFalse;
+        FcPatternGetBool(specs->font->pattern, FC_COLOR, 0, &b);
+        if (!b) { // normal glyphs
+            XftDrawGlyphFontSpec(xw.draw, fg, specs, len);
+        } else { // don't draw color glyphs
+            XftDrawGlyphFontSpec(xw.draw, fg, &specs[1], len-1);
+        }
+    }
 
 	/* Render underline and strikethrough. */
 	if (base.mode & ATTR_UNDERLINE) {
@@ -2237,6 +2243,7 @@ run:
 	if (!opt_title)
 		opt_title = (opt_line || !opt_cmd) ? "st" : opt_cmd[0];
 
+    has_libxft_gbra = !system("pacman -Q libxft | grep bgra");
 	setlocale(LC_CTYPE, "");
 	XSetLocaleModifiers("");
 
