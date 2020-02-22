@@ -8,6 +8,8 @@
 static char *font = "monospace:pixelsize=18:antialias=true:autohint=true";
 /* Spare fonts */
 static char *font2[] = {
+	"JoyPixels:pixelsize=16:antialias=true:autohint=true",
+	"Noto Color Emoji:pixelsize=16:antialias=true:autohint=true",
 	"Hack Nerd Font:pixelsize=18:antialias=true:autohint=true",
 	"Symbola:pixelsize=18:antialias=true:autohint=true",
 	"PowerlineSymbols:pixelsize=18:antialias=true:autohint=true",
