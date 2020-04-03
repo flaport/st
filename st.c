@@ -2629,9 +2629,6 @@ findlastany(char *str, const char** find, size_t len)
 
 /*
 ** Select and copy the previous url on screen (do nothing if there's no url).
-**
-** FIXME: doesn't handle urls that span multiple lines; will need to add support
-**        for multiline "getsel()" first
 */
 void
 copyurl(const Arg *arg) {
@@ -2642,15 +2639,16 @@ copyurl(const Arg *arg) {
 		"abcdefghijklmnopqrstuvwxyz"
 		"0123456789-._~:/?#@!$&'*+,;=%";
 
-	static const char* URLSTRINGS[] = {"http://", "https://"};
+	static const char* URLSTRINGS[] = {"http://", "https://", "file:///"};
 
-	/* remove highlighting from previous selection if any */
+	/* remove first letter highlighting from previous selection if any */
 	if(sel.ob.x >= 0 && sel.oe.x >= 0)
-		tsetcolor(sel.nb.y, sel.ob.x, sel.oe.x + 1, defaultfg, defaultbg);
+		tsetcolor(sel.nb.y, sel.ob.x, sel.ob.x + 1, defaultfg, defaultbg);
 
 	int i = 0,
 		row = 0, /* row of current URL */
 		col = 0, /* column of current URL start */
+		loop_broken = 0, /* check if a break was used in a loop */
 		startrow = 0, /* row of last occurrence */
 		colend = 0, /* column of last occurrence */
 		passes = 0; /* how many rows have been scanned */
@@ -2682,9 +2680,16 @@ copyurl(const Arg *arg) {
 		}
 		linestr[term.col] = '\0';
 
-		if ((match = findlastany(linestr, URLSTRINGS,
-						sizeof(URLSTRINGS)/sizeof(URLSTRINGS[0]))))
+        match = findlastany(linestr, URLSTRINGS, sizeof(URLSTRINGS)/sizeof(URLSTRINGS[0]));
+		if (match){
+            selclear();
+            col = sel.ob.x = strlen(linestr) - strlen(match);
+            sel.oe.x = sel.ob.x + 1;
+            sel.nb.y = sel.ob.y = sel.oe.y = row;
+            /* highlight first letter of url */
+            tsetcolor(sel.nb.y, sel.ob.x, sel.ob.x+1, defaultbg, defaultfg);
 			break;
+        }
 
 		if (--row < term.top)
 			row = term.bot;
@@ -2693,26 +2698,36 @@ copyurl(const Arg *arg) {
 		passes++;
 	};
 
-	if (match) {
-		/* must happen before trim */
-		selclear();
-		sel.ob.x = strlen(linestr) - strlen(match);
 
-		/* trim the rest of the line from the url match */
+	while (match) {
+        loop_broken = 0;
 		for (c = match; *c != '\0'; ++c)
 			if (!strchr(URLCHARS, *c)) {
 				*c = '\0';
+                loop_broken=1;
 				break;
 			}
+        if (loop_broken || row == term.bot){
+            break;
+        }
+        row++;
+        for (col = 0, i = 0; col < colend; ++col,++i) {
+            /* assume ascii */
+            if (term.line[row][col].u > 127)
+                continue;
+            linestr[i] = term.line[row][col].u;
+        }
+        linestr[term.col] = '\0';
+        match=linestr;
+        col=0;
+    }
 
-		/* highlight selection by inverting terminal colors */
-		tsetcolor(row, sel.ob.x, sel.ob.x + strlen( match ), defaultbg, defaultfg);
-
+    if (match) {
 		/* select and copy */
 		sel.mode = 1;
 		sel.type = SEL_REGULAR;
-		sel.oe.x = sel.ob.x + strlen(match)-1;
-		sel.ob.y = sel.oe.y = row;
+		sel.oe.x = col + strlen(match)-1;
+		sel.oe.y = row;
 		selnormalize();
 		tsetdirt(sel.nb.y, sel.ne.y);
 		xsetsel(getsel());
