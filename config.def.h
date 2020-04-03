@@ -246,6 +246,7 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_j,           kscrolldown,    {.i =  1} },
 	{ MODKEY,               XK_k,           kscrollup,      {.i =  1} },
 	{ MODKEY,               XK_n,           copyurl,        {.i =  +1}},
+	{ MODKEY,               XK_m,           copyurl,        {.i =  -1}},
 	{ MODKEY,               XK_o,           zoom,           {.f = -2} },
 	{ MODKEY,               XK_Page_Down,   kscrolldown,    {.i = -1} },
 	{ MODKEY,               XK_Page_Up,     kscrollup,      {.i = -1} },
