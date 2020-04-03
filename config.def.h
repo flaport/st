@@ -245,7 +245,7 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_i,           zoom,           {.f = +2} },
 	{ MODKEY,               XK_j,           kscrolldown,    {.i =  1} },
 	{ MODKEY,               XK_k,           kscrollup,      {.i =  1} },
-	{ MODKEY,               XK_n,           copyurl,        {.i =  0} },
+	{ MODKEY,               XK_n,           copyurl,        {.i =  +1}},
 	{ MODKEY,               XK_o,           zoom,           {.f = -2} },
 	{ MODKEY,               XK_Page_Down,   kscrolldown,    {.i = -1} },
 	{ MODKEY,               XK_Page_Up,     kscrollup,      {.i = -1} },
@@ -255,6 +255,7 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_Up,          kscrollup,      {.i =  1} },
 	{ MODKEY,               XK_v,           clippaste,      {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
+	{ TERMMOD,              XK_n,           copyurl,        {.i =  -1}},
 	{ TERMMOD,              XK_i,           zoom,           {.f = +1} },
 	{ TERMMOD,              XK_o,           zoom,           {.f = -1} },
 };

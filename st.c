@@ -2792,8 +2792,13 @@ copyurl(const Arg *arg) {
 			break;
         }
 
-		if (--row < term.top)
-			row = term.bot;
+        if (arg->i == -1){
+            if (--row < term.top)
+                row = term.bot;
+        } else {
+            if (++row > term.bot)
+                row = term.top + 1; /* FIXME: row = term.top freezes selection at row 0 */
+        }
 
 		colend = term.col;
 		passes++;
