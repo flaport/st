@@ -61,6 +61,16 @@ defined, one needs to define those with the `font2` patch.
 Enable font-ligatures. Note that a ligature-capable font needs to be
 defined as your *primary* st font for this to work.
 
+#### scrollback
+
+* see my [scroll repository](https://github.com/flaport/scroll)
+
+Scrollback is **not** implemented with the scrollback patch. In stead,
+a separate tiny (suckless) program, `sroll`, is used which implements
+this feature.  According to the suckless developers, this solution is
+much better than implementing the scrollback in st itself because
+having a different program allows to use it in any other program
+without doing modifications to those programs.
 
 ## Other branches
 
@@ -71,7 +81,7 @@ This version. Should be more or less up to date with master.
 A very similar build as v2 or master but with all the scrollback
 patches applied as well.
 
-#### Scrollback
+#### scrollback
 
 * download [combined patch](https://github.com/flaport/st/compare/upstream...scrollback.diff)
 * see [combined branch](https://github.com/flaport/st/tree/scrollback)
