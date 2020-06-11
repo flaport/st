@@ -240,22 +240,17 @@ static MouseShortcut mshortcuts[] = {
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
-	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
-	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
-	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
-	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
-	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
-	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
-	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
-	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
-	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
-	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
-	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ TERMMOD,              XK_Return,      newterm,        {.i =  0} },
-	{ MODKEY,               XK_n,           copyurl,        {.i =  +1} },
-	{ MODKEY,               XK_m,           copyurl,        {.i =  -1} },
+	{ MODKEY,               XK_c,           clipcopy,       {.i =  0} },
 	{ MODKEY,               XK_g,           opencopied,     {.v = "xdg-open"} },
+	{ MODKEY,               XK_Home,        zoomreset,      {.f =  0} },
+	{ MODKEY,               XK_i,           zoom,           {.f = +2} },
+	{ MODKEY,               XK_n,           copyurl,        {.i =  +1}},
+	{ MODKEY,               XK_m,           copyurl,        {.i =  -1}},
+	{ MODKEY,               XK_o,           zoom,           {.f = -2} },
+	{ MODKEY,               XK_p,           selpaste,       {.i =  0} },
+	{ MODKEY,               XK_Return,      newterm,        {.i =  0} },
+	{ MODKEY,               XK_v,           clippaste,      {.i =  0} },
+	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 };
 
 /*
