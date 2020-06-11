@@ -242,9 +242,6 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_Return,      newterm,        {.i =  0} },
 	{ MODKEY,               XK_v,           clippaste,      {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
-	{ TERMMOD,              XK_n,           copyurl,        {.i =  -1}},
-	{ TERMMOD,              XK_i,           zoom,           {.f = +1} },
-	{ TERMMOD,              XK_o,           zoom,           {.f = -1} },
 };
 
 /*
