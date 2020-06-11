@@ -255,7 +255,7 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Return,      newterm,        {.i =  0} },
 	{ MODKEY,               XK_n,           copyurl,        {.i =  +1} },
 	{ MODKEY,               XK_m,           copyurl,        {.i =  -1} },
-	{ MODKEY,               XK_o,           opencopied,     {.v = "xdg-open"} },
+	{ MODKEY,               XK_g,           opencopied,     {.v = "xdg-open"} },
 };
 
 /*
