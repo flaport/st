@@ -273,7 +273,7 @@ static char *opt_title = NULL;
 
 static int oldbutton = 3; /* button event on startup: 3 = release */
 
-int has_libxft_gbra = 0;
+int has_libxft_bgra = 0;
 
 void
 clipcopy(const Arg *dummy)
@@ -1606,7 +1606,7 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
 
 	/* Render the glyphs. */
     // hacky anti-crash fix (just don't render the glyph)
-    if (has_libxft_gbra){
+    if (has_libxft_bgra){
 	    XftDrawGlyphFontSpec(xw.draw, fg, specs, len); // (original)
     } else {
         FcBool b = FcFalse;
@@ -2250,7 +2250,7 @@ run:
 	if (!opt_title)
 		opt_title = (opt_line || !opt_cmd) ? "st" : opt_cmd[0];
 
-    has_libxft_gbra = !system("pacman -Q libxft | grep bgra");
+    has_libxft_bgra = !system("pacman -Q libxft | grep bgra");
 	setlocale(LC_CTYPE, "");
 	XSetLocaleModifiers("");
 
