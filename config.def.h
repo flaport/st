@@ -12,6 +12,7 @@ static char *font2[] = {
 	"Pomodoro:pixelsize=18:antialias=true:autohint=true",
 	"Octicons:pixelsize=18:antialias=true:autohint=true",
 	"FontAwesome:pixelsize=18:antialias=true:autohint=true",
+	"FiraCode Nerd Font:pixelsize=18:antialias=true:autohint=true",
 	"Hack Nerd Font:pixelsize=18:antialias=true:autohint=true",
 	"Fira Code:pixelsize=18:antialias=true:autohint=true",
 	"Icomoon:pixelsize=18:antialias=true:autohint=true",
